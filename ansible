@@ -1,0 +1,33 @@
+Ansible Doc Site
+ 
+ 1. http://www.ansible.com.cn/docs/playbooks_acceleration.html
+ 
+ 2. http://www.mamicode.com/info-detail-1424482.html
+
+ 3. http://docs.ansible.com/ansible/latest/intro.html
+ 
+ 
+
+
+Ansible Install
+ 
+ 1. pip install ansible
+ 
+ 
+Ansible default cfg files:    /etc/ansible/ansible.cfg 
+
+ansible.cfg  :
+  
+inventory      = /etc/ansible/hosts
+sudo_user=root
+remote_port=22
+host_key_checking=False
+remote_user=root
+log_path=/var/log/ansible.log
+module_name=command
+private_key_file=/root/.ssh/id_rsa
+no_log:True
+ 
+  
+ 
+ 
