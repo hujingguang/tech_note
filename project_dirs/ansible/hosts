@@ -1,0 +1,2 @@
+[local]
+127.0.0.1:22 ansible_ssh_user=root ansible_ssh_pass=LDzuibang123

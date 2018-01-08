@@ -1,0 +1,6 @@
+---
+- name: install mysql
+  hosts: local
+  gather_facts: false
+  roles:
+    - mysql

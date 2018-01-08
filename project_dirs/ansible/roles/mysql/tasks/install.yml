@@ -1,0 +1,18 @@
+---
+- name: test mysql source ball is exist
+  command: test -e /tmp/mysql-5.6.10.tar.gz
+  register: result
+  ignore_errors: True
+  tags: install
+
+- name: upload mysql source code
+  copy: src=mysql-5.6.10.tar.gz dest=/tmp/mysql-5.6.10.tar.gz
+  register: result
+  when: result|failed
+  tags: install
+  
+
+- name: extract source tar ball 
+  shell: /bin/tar -zxvf /tmp/mysql-5.6.10.tar.gz -C /tmp/
+  tags: install
+  
