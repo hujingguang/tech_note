@@ -16,18 +16,42 @@ Ansible Install
  
 Ansible default cfg files:    /etc/ansible/ansible.cfg 
 
-ansible.cfg  :
+变量配置目录：   /etc/ansible/group_vars,  /etc/ansible/host_vars
+
+
+ansible.cfg 简单配置  :
   
-inventory      = /etc/ansible/hosts
-sudo_user=root
-remote_port=22
-host_key_checking=False
-remote_user=root
-log_path=/var/log/ansible.log
-module_name=command
-private_key_file=/root/.ssh/id_rsa
-no_log:True
+	inventory      = /etc/ansible/hosts
+        roles_path     = /etc/ansible/roles
+	sudo_user=root
+	remote_port=22
+	host_key_checking=False
+	remote_user=root
+	log_path=/var/log/ansible.log
+	module_name=command
+	private_key_file=/root/.ssh/id_rsa
+	no_log:True
+	 
+
+roles目录结构：
+
+     /etc/ansible/roles/tasks
+
+     /etc/ansible/roles/files
+
+     /etc/ansible/roles/templates
+
+     /etc/ansible/roles/meta
+
+     /etc/ansible/roles/vars
+
+     /etc/ansible/roles/handlers
+
+
+
  
-  
+
+注意事项： roles目录下每个模块的Yml文件必须以main 命名. 格式为yml格式(以---开头)
+   
  
  
