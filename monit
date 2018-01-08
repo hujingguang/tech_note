@@ -3,4 +3,22 @@ monit Doc site
 1. https://mmonit.com/monit/documentation/monit.html
 
 
-开源的本地服务，网络，系统资源等监控工具，强大，简单，支持邮件报警
+开源的本地服务，网络，系统资源等监控工具，强大，简单，支持邮件报警. 使用轮询对定义的服务进行检测(set daemon poll_interval)
+
+支持简单的配置语言。
+
+使用的模块有：
+      
+      1. process  #主要检测后台进程
+
+      2. network   #检测网络网卡信息
+
+      3. program   #程序脚本调用支持
+
+      4. file     #文件检测
+
+      5. directory    #目录监控
+
+      6. system   #系统监控检测
+
+      7. host      #远程主机或本地主机监控检测
