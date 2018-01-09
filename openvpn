@@ -22,7 +22,16 @@ OpenVPN  一款强大的开源VPN实现工具，使用openssl作为加密工具�
     .dh : 交换密钥时算法需要用的字符串
 
 
-5. 客户端版本和服务器端版本需一致，  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+5.证书密钥生成。
+   
+    cd  easy_rsa    
+
+    ./pkitool --help 
+
+
+
+
+6. 客户端版本和服务器端版本需一致，  iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
 
 server.conf 配置如下：
 
