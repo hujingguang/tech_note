@@ -76,6 +76,17 @@ verb 3
 
 
 
+
+注意问题：
+
+ 1. 可以连接到vpn 服务器，但是无法连接外网 ，解决方案：
+
+
+    a.  打开系统转发功能  echo 1 > /proc/sys/net/ipv4/ip_forward
+
+    b.  添加Iptales nat。 iptables -t nat -A POSTROUTING -o eth0 -j SNAT -s 10.8.0.0/24 --to-source your_public_ip_address  OR  iptables -t nat -A POSTROUTING -o eth0 -s 10.8.0.0/24 -j MASQUERADE 
+
+
 参考文档：  
      
     https://www.jianshu.com/p/4bbf946222d5
