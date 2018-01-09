@@ -19,4 +19,54 @@ OpenVPN  一款强大的开源VPN实现工具，使用openssl作为加密工具�
 
     .key: 为私钥文件。
 
-    .dh : 
+    .dh : 交换密钥时算法需要用的字符串
+
+
+5. 客户端版本和服务器端版本需一致，
+
+server.conf 配置如下：
+
+local 192.168.10.238
+port 1194
+proto udp
+dev tun
+ca /etc/openvpn/ca.crt
+cert /etc/openvpn/server1.crt
+key /etc/openvpn/server1.key  # This file should be kept secret
+dh /etc/openvpn/dh2048.pem
+server 10.8.0.0 255.255.255.0
+ifconfig-pool-persist /etc/openvpn/ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push "dhcp-option DNS 114.114.114.114"
+keepalive 10 120
+cipher AES-256-CBC
+persist-key
+persist-tun
+status /tmp/openvpn-status.log
+log         /tmp/openvpn.log
+verb 3
+explicit-exit-notify 1
+
+
+
+client配置如下：
+
+client
+dev tun
+proto udp
+remote 192.168.10.238 1194 
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+ca ca.crt 
+cert client1.crt
+key client1.key
+comp-lzo
+verb 3
+
+
+
+参考文档：  
+     
+    https://www.jianshu.com/p/4bbf946222d5
