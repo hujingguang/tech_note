@@ -1,0 +1,22 @@
+
+OpenVPN  一款强大的开源VPN实现工具，使用openssl作为加密工具。
+
+1. 安装 yum install openvpn  -y   . 
+
+2. 下载easy-rsa生成ca server 证书密钥对,client证书密钥对。
+    
+    地址： https://github.com/OpenVPN
+
+   模式有 server 模式  client to client 模式， 如果要支持多客户端，在服务器配置中禁用client to client。主要通过 tun虚拟网卡模式进行数据传输。
+
+3. 客户端和服务端进行证书的双向认证，通过CA根证书进行验证，而不用读取各自的证书，如果通过CA证书认证，则接受来自客户端的请求建立链接。
+
+4.  名词解析
+
+    .crq ：为证书请求文件，由openssl 在生成私钥的同时生成该文件，包含了公钥等信息
+
+    .crt:  为证书文件， 由openssl 根据ca证书,用户的crq文件进行生成，包含了公钥，域名，过期时间等信息。
+
+    .key: 为私钥文件。
+
+    .dh : 
