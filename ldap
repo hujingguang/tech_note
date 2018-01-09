@@ -1,0 +1,11 @@
+
+LDAP  (轻量级目录管理协议),用来管理用户信息
+
+requirements:   Berkeley DB,    #doc  http://www.linuxfromscratch.org/blfs/view/svn/server/db.html
+
+
+Install BDB: 
+
+     1. yum install glibc-headers   gcc-c++ -y
+
+     2. ../dist/configure --prefix=/usr --enable-compat185  --enable-dbm  --enable-cxx
