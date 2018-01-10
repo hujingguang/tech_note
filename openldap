@@ -20,6 +20,22 @@ Install OpenLDAP:
 
 
 
+命令解析：
+        ldappasswd ： 用来生成一个密码加密的字符串，在sldap.conf 中 rootpw 的值填写该字符串作为管理员的密码
+
+        ./bin/ldapsearch -x -w 123123 -D 'cn=admin,dc=wikiki,dc=com' -H ldap://127.0.0.1 -b 'cn=hoover,dc=wikiki,dc=com'  
+        #查询一个entry,
+        -x   -- 使用简单密码访问
+        -w   -- 输入的密码
+        -D   -- 指定一个根标识符，表示这颗树的根
+        -H   -- 访问的url
+        -b   -- 要搜索的entry
+        
+        ./bin/ldapadd -x -w 123123 -D 'cn=admin,dc=wikiki,dc=com' -H ldap://127.0.0.1 -f add_user.ldif
+         #从一个文件创建entry
+                      
+
+
 
 
 注意事项：
