@@ -8,4 +8,20 @@ Install BDB:
 
      1. yum install glibc-headers   gcc-c++ -y
 
-     2. ../dist/configure --prefix=/usr --enable-compat185  --enable-dbm  --enable-cxx
+     2. ../dist/configure --prefix=/usr/local/bdb5.0 --enable-compat185  --enable-dbm  --enable-cxx
+        make  && make docdir=/usr/share/doc/db-5.0 install
+       # chown -v -R root:root   /usr/bin/db* /usr/include/db{,_185,_cxx}.h /usr/lib/libdb*.{so,la} /usr/share/doc/db-6.2.32 
+ 
+Install OpenLDAP:
+     1. ./configure --prefix=/usr/local/openladp  CPPFLAGS="-I/usr/local/bdb5.0/include" LDFLAGS="-L/usr/local/bdb5.0/lib -Wl,-rpath,/usr/local/bdb5.0/lib"
+
+         make depend && make && make install
+
+
+
+
+
+
+注意事项：
+      
+     openldap v2.4.4  只支持 BDB v4.4 ~ v4.8 or  v5.0 ~ 5.1
