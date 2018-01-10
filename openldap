@@ -1,5 +1,5 @@
 
-LDAP  (轻量级目录管理协议),用来管理用户信息
+LDAP  (轻量级目录管理协议),用来集中管理用户账号信息
 
 requirements:   Berkeley DB,    #doc  http://www.linuxfromscratch.org/blfs/view/svn/server/db.html
 
@@ -25,3 +25,8 @@ Install OpenLDAP:
 注意事项：
       
      openldap v2.4.4  只支持 BDB v4.4 ~ v4.8 or  v5.0 ~ 5.1
+
+
+
+Doc:
+    http://www.linuxidc.com/Linux/2016-08/134225.htm
