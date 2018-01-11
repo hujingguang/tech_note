@@ -42,6 +42,19 @@ Install OpenLDAP:
 
 
 
+     4. 安装phpldapadmin  :   
+
+           注意版本，php5.4   
+            ./configure --prefix=/usr/local/php2  --with-openssl --with-gettext --enable-fpm --with-mysql --with-mysqli --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir=shared --enable-xml --with-curl --with-mhash --with-mcrypt --with-gd --enable-gd-native-ttf --with-xsl --with-ldap --with-ldap-sasl --with-xmlrpc --without-pear --enable-zip --enable-soap --enable-mbstring --enable-ftp --enable-sockets --enable-pcntl --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --disable-rpath --enable-mbregex --with-xmlrpc --enable-wddx --enable-ftp --with-ldap=/usr/local/openldap2
+
+
+      phpldapadmin 配置文件  ./config 下面  
+
+             $servers->setValue('server','host','127.0.0.1');
+
+             $servers->setValue('server','base',array('dc=imlaidian,dc=com'));
+
+             $servers->setValue('login','bind_id','cn=admin,dc=imlaidian,dc=com');
 
 命令解析：
         ldappasswd ： 用来生成一个密码加密的字符串，在sldap.conf 中 rootpw 的值填写该字符串作为管理员的密码
