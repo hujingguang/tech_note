@@ -16,6 +16,11 @@ Install OpenLDAP:
      1. ./configure --prefix=/usr/local/openladp  CPPFLAGS="-I/usr/local/bdb5.0/include" LDFLAGS="-L/usr/local/bdb5.0/lib -Wl,-rpath,/usr/local/bdb5.0/lib"
 
          make depend && make && make install
+     2. vim   etc/openldap/sldap.conf  修改DN，密码。密码生成： ./sbin/ldappasswd  
+
+        ./sbin/ldaptest  -F etc/openldap -f etc/openldap/sldap.conf   #生成 cn=config目录及动态文件，如不执行则无法启动服务！
+    
+        ./libexe/sldapd -F etc/openldap    #启动服务
 
 
 
