@@ -22,6 +22,24 @@ Install OpenLDAP:
     
         ./libexe/sldapd -F etc/openldap    #启动服务
 
+     3. 初始化根DN
+       
+         vim ./init.ldif
+                dn: dc=imlaidian,dc=com
+		dc: imlaidian
+		objectClass: top
+		objectClass: dcObject
+		objectClass: organization
+		o: laidian
+
+		dn: cn=admin,dc=imlaidian,dc=com
+		cn: admin
+		cn: hu jing guang
+		objectClass: top
+		objectClass: person
+		sn: jingguang
+
+
 
 
 
