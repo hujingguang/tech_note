@@ -1,1 +1,4 @@
 
+Mysql GTID(global trasaction id) 全局事务Id模式，比普通的异步复制更可靠以及更简单安全。不需要在从库指定 log_bin和position
+
+    
