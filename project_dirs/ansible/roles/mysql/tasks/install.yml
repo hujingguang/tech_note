@@ -1,18 +1,77 @@
 ---
-- name: test mysql source ball is exist
-  command: test -e /tmp/mysql-5.6.10.tar.gz
+- name: mysql source code is exist ?
+  shell: test -e /tmp/mysql-5.6.10.tar.gz &>/dev/null
   register: result
   ignore_errors: True
-  tags: install
+  tags: install_mysql
 
+- name: mysql user is exists? 
+  shell: grep '{{user}}:' /etc/passwd &>/dev/null
+  register: result_user
+  ignore_errors: True
+  tags: install_mysql
+  
 - name: upload mysql source code
   copy: src=mysql-5.6.10.tar.gz dest=/tmp/mysql-5.6.10.tar.gz
   register: result
   when: result|failed
-  tags: install
+  tags: install_mysql
   
 
 - name: extract source tar ball 
-  shell: /bin/tar -zxvf /tmp/mysql-5.6.10.tar.gz -C /tmp/
-  tags: install
+  shell: test -e /tmp/mysql-5.6.10 || /bin/tar -zxf /tmp/mysql-5.6.10.tar.gz -C /tmp/
+  tags: install_mysql
   
+
+- name: create mysql user
+  shell: useradd {{user}} -s /sbin/nologin &>/dev/null
+  when: result_user|failed
+  tags: install_mysql
+
+- name: install dependence
+  shell: /usr/bin/yum install cmake ncurses-devel zlib-devel perl-DBI perl-DBD-mysql perl-Time-HiRes perl-IO-Socket-SSL perl-Term-ReadKey gcc* -y 
+  tags: install_mysql
+
+- name: Mysql is exists ?
+  shell: test -e {{install_mysql_dir}}/bin/mysqld
+  ignore_errors: True
+  register: result_install
+  tags: install_mysql
+
+
+- name: configure and make and make install
+  shell: mkdir -p {{install_mysql_dir}} {{install_mysql_data_dir}} && chown -R  {{user}}.{{user}} {{install_mysql_dir}} && cd /tmp/mysql-5.6.10 && cmake -DCMAKE_INSTALL_PREFIX={{install_mysql_dir}} -DMYSQL_DATADIR={{install_mysql_data_dir}} {{mysql_compile_args}} && make && make install 
+  when: result_install|failed
+  tags: install_mysql
+
+- name: init mysql
+  shell: test -e {{install_mysql_data_dir}}/mysql || ( cd {{install_mysql_dir}} && ./scripts/mysql_install_db --basedir={{install_mysql_dir}} --datadir={{install_mysql_data_dir}} --user={{user}} --skip-name-resolve )
+  register: init_result
+  tags: install_mysql
+
+- name: create mysql logs file directory
+  file: 
+    path: '{{item}}'
+    state: directory
+    mode: 0755
+    recurse: yes
+    owner: '{{user}}'
+    group: '{{user}}'
+  with_items:
+    - '{{install_mysql_dir}}'
+    - '{{mysql_pid_dir}}'
+    - '{{mysql_log_dir}}'
+    - '{{mysql_binlog_dir}}'
+  tags: install_mysql
+
+- name: render my.cnf and copy to remote host
+  template: 
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    mode: u=rwx,g=rx,o=r
+  with_items:
+    - {src: 'my.j2', dest: '/etc/my.cnf'}
+    - {src: 'mysqld.j2', dest: '/etc/init.d/mysqld'}
+  tags: install_mysql
+  notify:
+    - restart mysql server

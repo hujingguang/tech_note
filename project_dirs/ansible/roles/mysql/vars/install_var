@@ -1,3 +1,5 @@
-basedir=/usr/local/mysql
-datadir=/usr/local/mysql/data
-user=mysql
+---
+basedir: /usr/local/mysql
+datadir: /usr/local/mysql/data
+user: mysql
+configure_args: '-DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DENABLED_LOCAL_INFILE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DEXTRA_CHARSET=utf8 -DWITH_USER={{user}} -DWITH_EMBEDDED_SERVER=OFF'

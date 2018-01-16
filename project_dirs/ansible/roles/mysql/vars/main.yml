@@ -1,0 +1,8 @@
+---
+user: mysql
+install_mysql_dir: /usr/local/ansible_soft/mysql
+install_mysql_data_dir: /usr/local/ansible_soft/mysql/data
+mysql_compile_args: -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_ARCHIVE_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DENABLED_LOCAL_INFILE=1 -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci -DEXTRA_CHARSET=utf8 -DWITH_USER=mysql -DWITH_EMBEDDED_SERVER=OFF
+mysql_pid_dir: /usr/local/ansible_soft/mysql/vars
+mysql_log_dir: /usr/local/ansible_soft/mysql/logs
+mysql_binlog_dir: /usr/local/ansible_soft/mysql/binlogs
