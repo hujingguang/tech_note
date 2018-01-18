@@ -1,0 +1,20 @@
+port 1194
+proto udp
+dev tun
+ca ca.crt
+cert server.crt
+key server.key
+dh dh2048.pem
+server 10.8.1.0 255.255.255.0
+ifconfig-pool-persist ipp.txt
+push "redirect-gateway def1 bypass-dhcp"
+push 'route 10.8.1.0 255.255.255.0'
+push 'dhcp-option DNS 8.8.8.8'
+client-to-client
+keepalive 10 120
+comp-lzo
+persist-key
+persist-tun
+status /tmp/openvpn_status.log
+log /tmp/openvpn.log
+verb 3
